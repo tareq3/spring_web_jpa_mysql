@@ -1,0 +1,19 @@
+version: "3"
+services:
+  library-jdbc:
+    image: library-jdbc
+    ports:
+    - "8080:8080"
+    networks:
+      - library-spring-mysql
+    depends_on:
+      - mysql-db
+  mysql-db:
+    image: mysql:8
+    networks:
+      - library-spring-mysql
+    entrypoint:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=library
+networks:
+  library-spring-mysql:
